@@ -838,17 +838,37 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0f6226fa046d4840ae370472ea91310, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerCamera: {fileID: 963194227}
   isShooting: 0
   readyToShoot: 0
-  shootingDelay: 0.2
-  bulletsPerBurst: 3
-  spreadIntensity: 0
+  shootingDelay: 0.15
+  bulletsPerBurst: 1
+  spreadIntensity: 0.1
   bulletPrefab: {fileID: 7394954646298223805, guid: 7fcbcd71dc705ea4586414e81d5db0ce, type: 3}
   bulletSpawn: {fileID: 481303157}
-  bulletVelocity: 100
-  bulletPrefabLifeTime: 3
+  bulletVelocity: 500
+  bulletPrefabLifeTime: 2
   currentShootingMode: 1
+--- !u!95 &1720298226
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720298219}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 68f83d768bd19a24597a67a69bcd7166, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!1 &1751258275
 GameObject:
   m_ObjectHideFlags: 0
@@ -1056,7 +1076,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4519716788627816, guid: e43ed810d4ce81a4cb3ca5b5ca037fbf, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.421
+      value: 1.309
       objectReference: {fileID: 0}
     - target: {fileID: 4519716788627816, guid: e43ed810d4ce81a4cb3ca5b5ca037fbf, type: 3}
       propertyPath: m_LocalPosition.z
@@ -1090,6 +1110,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4977263084664720, guid: e43ed810d4ce81a4cb3ca5b5ca037fbf, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
@@ -1100,6 +1124,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1487774384131766, guid: e43ed810d4ce81a4cb3ca5b5ca037fbf, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1720298223}
+    - targetCorrespondingSourceObject: {fileID: 1487774384131766, guid: e43ed810d4ce81a4cb3ca5b5ca037fbf, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1720298226}
   m_SourcePrefab: {fileID: 100100000, guid: e43ed810d4ce81a4cb3ca5b5ca037fbf, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

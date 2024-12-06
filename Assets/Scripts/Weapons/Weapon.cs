@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-    [SerializeField] private Camera playerCamera;
 
     [SerializeField] private bool isShooting, readyToShoot;
     private bool allowReset = true;
@@ -20,6 +19,8 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float bulletVelocity = 100;
     [SerializeField] private float bulletPrefabLifeTime = 3f;
 
+    private Animator animator;
+
     [SerializeField]
     private enum ShootingMode
     {
@@ -33,6 +34,7 @@ public class Weapon : MonoBehaviour
     {
         readyToShoot = true;
         burstBulletsLeft = bulletsPerBurst;
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -56,6 +58,7 @@ public class Weapon : MonoBehaviour
 
     private void FireWeapon()
     {
+        animator.SetTrigger("RECOIL");
         readyToShoot = false;
 
         Vector3 shootingDirection = CalculateDirectionAndSpread().normalized;
@@ -89,7 +92,7 @@ public class Weapon : MonoBehaviour
 
     public Vector3 CalculateDirectionAndSpread()
     {
-        Ray ray = playerCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
         RaycastHit hit;
 
         Vector3 targetPoint;
