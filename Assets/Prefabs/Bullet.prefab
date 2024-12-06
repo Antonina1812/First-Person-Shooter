@@ -148,3 +148,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84456c807214af14292c596922c62165, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletMarkPrefab: {fileID: 1445620334446941263, guid: 13db0dbc829e6ab40b4f1d5f1c4a067b, type: 3}
+  bulletMarkLifetime: 10
