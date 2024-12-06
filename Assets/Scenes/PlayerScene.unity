@@ -211,8 +211,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mouseSensitivity: 500
-  topClamp: -90
-  bottomClamp: 90
+  topClamp: -45
+  bottomClamp: 45
 --- !u!1 &444752783
 GameObject:
   m_ObjectHideFlags: 0

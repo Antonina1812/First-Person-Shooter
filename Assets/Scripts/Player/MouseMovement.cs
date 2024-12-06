@@ -7,8 +7,8 @@ public class MouseMovement : MonoBehaviour
     [SerializeField] private float mouseSensitivity = 500f;
     private float xRotation = 0f;
     private float yRotation = 0f;
-    [SerializeField] private float topClamp = -90f;
-    [SerializeField] private float bottomClamp = 90f;
+    [SerializeField] private float topClamp = -45f;
+    [SerializeField] private float bottomClamp = 45f;
     void Start()
     {
         Cursor.lockState = CursorLockMode.Locked;
