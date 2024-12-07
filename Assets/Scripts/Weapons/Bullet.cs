@@ -1,0 +1,37 @@
+using System.Collections;
+using UnityEngine;
+
+public class Bullet : MonoBehaviour
+{
+    [SerializeField] private GameObject bulletMarkPrefab; // Префаб следа от пули
+    [SerializeField] private float bulletMarkLifetime = 10f; // Время жизни следа
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (bulletMarkPrefab == null)
+        {
+            Debug.LogError("Префаб следа от пули не назначен");
+            return;
+        }
+
+        // Создаем след на месте столкновения
+        ContactPoint contact = collision.contacts[0];
+        Quaternion rotation = Quaternion.LookRotation(-contact.normal); // Поворачиваем след в направлении нормали
+        GameObject bulletMark = Instantiate(bulletMarkPrefab, contact.point, rotation);
+
+        // Смещаем след немного наружу по нормали
+        bulletMark.transform.position += contact.normal * 0.01f;
+
+        // Устанавливаем масштаб
+        bulletMark.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+
+        // Привязываем след к объекту
+        bulletMark.transform.SetParent(collision.transform);
+
+        // Уничтожаем след через заданное время
+        Destroy(bulletMark, bulletMarkLifetime);
+
+        // Уничтожаем пулю
+        Destroy(gameObject);
+    }
+}
