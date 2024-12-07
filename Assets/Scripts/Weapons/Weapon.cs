@@ -20,7 +20,7 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float bulletPrefabLifeTime = 3f;
 
     private Animator animator;
-
+    private WeaponSoundManager weaponSoundManager;
     [SerializeField]
     private enum ShootingMode
     {
@@ -35,6 +35,7 @@ public class Weapon : MonoBehaviour
         readyToShoot = true;
         burstBulletsLeft = bulletsPerBurst;
         animator = GetComponent<Animator>();
+        weaponSoundManager = GetComponentInChildren<WeaponSoundManager>();
     }
 
     // Update is called once per frame
@@ -60,6 +61,11 @@ public class Weapon : MonoBehaviour
     {
         animator.SetTrigger("RECOIL");
         readyToShoot = false;
+
+        if (weaponSoundManager != null)
+        {
+            weaponSoundManager.PlayShootSound();
+        }
 
         Vector3 shootingDirection = CalculateDirectionAndSpread().normalized;
 
