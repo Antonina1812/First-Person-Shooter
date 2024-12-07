@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
-
     [SerializeField] private bool isShooting, readyToShoot;
     private bool allowReset = true;
     [SerializeField] private float shootingDelay = 2f;
@@ -19,8 +18,15 @@ public class Weapon : MonoBehaviour
     [SerializeField] private float bulletVelocity = 100;
     [SerializeField] private float bulletPrefabLifeTime = 3f;
 
-    private Animator animator;
+    [Header("Recoil Settings")]
+    [SerializeField] private Vector3 recoilPower = new Vector3(2f, 1f, 0f); // Мощность отдачи
+    [SerializeField] private float recoilReturnSpeed = 5f; // Скорость возврата
+    [SerializeField] private float recoilSnap = 10f; // Скорость "рывка" к отдаче
+    private Vector3 targetRecoil;
+    private Vector3 currentRecoil;
+
     private WeaponSoundManager weaponSoundManager;
+
     [SerializeField]
     private enum ShootingMode
     {
@@ -34,13 +40,17 @@ public class Weapon : MonoBehaviour
     {
         readyToShoot = true;
         burstBulletsLeft = bulletsPerBurst;
-        animator = GetComponent<Animator>();
         weaponSoundManager = GetComponentInChildren<WeaponSoundManager>();
     }
 
-    // Update is called once per frame
     void Update()
     {
+        // Обработка отдачи
+        targetRecoil = Vector3.Lerp(targetRecoil, Vector3.zero, recoilReturnSpeed * Time.deltaTime);
+        currentRecoil = Vector3.Slerp(currentRecoil, targetRecoil, recoilSnap * Time.deltaTime);
+        Camera.main.transform.localRotation = Quaternion.Euler(currentRecoil);
+
+        // Логика стрельбы
         if (currentShootingMode == ShootingMode.Auto)
         {
             isShooting = Input.GetKey(KeyCode.Mouse0);
@@ -59,13 +69,15 @@ public class Weapon : MonoBehaviour
 
     private void FireWeapon()
     {
-        animator.SetTrigger("RECOIL");
         readyToShoot = false;
 
         if (weaponSoundManager != null)
         {
             weaponSoundManager.PlayShootSound();
         }
+
+        // Реализация отдачи
+        ApplyRecoil();
 
         Vector3 shootingDirection = CalculateDirectionAndSpread().normalized;
 
@@ -89,6 +101,17 @@ public class Weapon : MonoBehaviour
             Invoke("FireWeapon", shootingDelay);
         }
     }
+
+
+    private void ApplyRecoil()
+    {
+        targetRecoil += new Vector3(
+            -recoilPower.x, // Отдача вверх по оси X (по инверсии камеры)
+            Random.Range(-recoilPower.y, recoilPower.y), // Случайная отдача по оси Y
+            0 // Z обычно не влияет на камеру
+        );
+    }
+
 
     private void ResetShot()
     {
