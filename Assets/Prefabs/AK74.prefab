@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 4628190596468080}
   - component: {fileID: 33974513469355770}
   - component: {fileID: 23269604117648666}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Trigger
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -94,7 +94,7 @@ GameObject:
   - component: {fileID: 4871155855958596}
   - component: {fileID: 33621225348611210}
   - component: {fileID: 23032416416855840}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bolt
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: 23860282398207496}
   - component: {fileID: 3279861575430591027}
   - component: {fileID: 8146680765431873133}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: AK74
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -313,7 +313,7 @@ GameObject:
   - component: {fileID: 4977263084664720}
   - component: {fileID: 33803936345550136}
   - component: {fileID: 23124041486323528}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Mag
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -394,7 +394,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 751398785516173184}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: BulletSpawn
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -427,7 +427,7 @@ GameObject:
   - component: {fileID: 982447404795517302}
   - component: {fileID: 839731498863711945}
   - component: {fileID: 9192655538186991084}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: SoundAK47
   m_TagString: Untagged
   m_Icon: {fileID: 0}
