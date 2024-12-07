@@ -842,11 +842,14 @@ MonoBehaviour:
   readyToShoot: 0
   shootingDelay: 0.15
   bulletsPerBurst: 1
-  spreadIntensity: 0.1
+  spreadIntensity: 0.01
   bulletPrefab: {fileID: 7394954646298223805, guid: 7fcbcd71dc705ea4586414e81d5db0ce, type: 3}
   bulletSpawn: {fileID: 481303157}
   bulletVelocity: 500
   bulletPrefabLifeTime: 2
+  recoilPower: {x: 3, y: 2, z: 0}
+  recoilReturnSpeed: 5
+  recoilSnap: 10
   currentShootingMode: 1
 --- !u!95 &1720298226
 Animator:
