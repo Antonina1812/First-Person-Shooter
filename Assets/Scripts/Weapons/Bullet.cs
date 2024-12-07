@@ -13,7 +13,10 @@ public class Bullet : MonoBehaviour
             Debug.LogError("Префаб следа от пули не назначен");
             return;
         }
-
+        if(collision.gameObject.CompareTag("Enemy"))
+        {
+            Destroy(collision.gameObject);
+        }
         // Создаем след на месте столкновения
         ContactPoint contact = collision.contacts[0];
         Quaternion rotation = Quaternion.LookRotation(-contact.normal); // Поворачиваем след в направлении нормали
