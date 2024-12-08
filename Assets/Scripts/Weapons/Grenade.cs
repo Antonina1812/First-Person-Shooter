@@ -12,7 +12,12 @@ public class Grenade : MonoBehaviour
     private int currentGrenades;
     private bool canThrow = true;
     private WeaponSwitch weaponSwitch;
+    private GrenadeSoundManager grenadeSoundManager;
 
+    private void Awake()
+    {
+        grenadeSoundManager = GetComponentInChildren<GrenadeSoundManager>();
+    }
     private void Start()
     {
         currentGrenades = maxGrenades;
@@ -38,7 +43,6 @@ public class Grenade : MonoBehaviour
             }
         }
     }
-
 
     private void ThrowGrenade()
     {
@@ -80,6 +84,18 @@ public class Grenade : MonoBehaviour
     {
         CreateExplosionEffect();
         ApplyDamageAndForce();
+
+        // Используем свойство для получения звука
+        AudioClip explosionClip = grenadeSoundManager.ExplosionSound;
+        if (explosionClip != null)
+        {
+            AudioSource.PlayClipAtPoint(explosionClip, transform.position);
+        }
+        else
+        {
+            Debug.LogWarning("Explosion sound is not assigned!");
+        }
+
         Destroy(gameObject);
     }
 
