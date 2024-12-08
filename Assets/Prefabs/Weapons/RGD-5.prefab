@@ -179,6 +179,7 @@ GameObject:
   - component: {fileID: 3737788083253069360}
   - component: {fileID: 7827758194099621770}
   - component: {fileID: 8913599220881814339}
+  - component: {fileID: 2600089592652712085}
   m_Layer: 0
   m_Name: RGD-5
   m_TagString: Untagged
@@ -194,7 +195,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6845818860342141415}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.38, y: 1.05, z: 1.01}
   m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
@@ -275,3 +276,19 @@ CapsuleCollider:
   m_Height: 0.15676454
   m_Direction: 1
   m_Center: {x: 0, y: 0.027264815, z: 0}
+--- !u!114 &2600089592652712085
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6845818860342141415}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0067280faf38c8d48853ceb17b1de570, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  delay: 2
+  damageRadius: 20
+  explosionForce: 1200
+  hasBeenThrown: 0
