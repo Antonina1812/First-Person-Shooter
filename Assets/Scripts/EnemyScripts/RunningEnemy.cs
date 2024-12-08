@@ -2,14 +2,14 @@ using UnityEngine;
 
 public class RunningEnemy : Enemy
 {
-    [SerializeField] private float moveSpeed = 5f;
+    [SerializeField] private float moveSpeed = 7f;
     [SerializeField] private Transform player;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawn;
-    [SerializeField] private float fireRate = 2f;
-    [SerializeField] private float stopDistance = 10f; // Дистанция остановки от игрока
-    [SerializeField] private float bulletSpeed = 10f;
-    [SerializeField] private float inaccuracy = 1f;
+    [SerializeField] private float fireRate = 1.5f; //Задержка перед выстрелом
+    [SerializeField] private float stopDistance = 12f; // Дистанция остановки от игрока
+    [SerializeField] private float bulletSpeed = 100f;
+    [SerializeField] private float inaccuracy = 0.25f; //Отклонение пули относительно прямой к игроку
     private WeaponSoundManager weaponSoundManager;
     private float nextFireTime;
 
@@ -72,7 +72,7 @@ private void Fire()
     bullet.GetComponent<Rigidbody>().AddForce(shootingDirection * bulletSpeed, ForceMode.Impulse);
 }
 
-
+    //Считаем случайное отклонение от прямой к игроку
     private Vector3 CalculateInaccurateDirection()
     {
         Vector3 direction = (player.position - bulletSpawn.position).normalized;

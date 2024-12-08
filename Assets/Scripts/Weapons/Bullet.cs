@@ -10,12 +10,17 @@ public class Bullet : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Enemy")) //Если попали во врага
+        if (collision.gameObject.CompareTag("Player")) //Если попали в игрока
+        {
+            Debug.Log("Попали в игрока");
+            Destroy(gameObject);
+        }
+        else if (collision.gameObject.CompareTag("Enemy")) //Если попали во врага
         {
             collision.gameObject.GetComponent<Enemy>().TakeDamage(bulletDamage);
             Destroy(gameObject);
         }
-        else //Если не попали во врага
+        else //Если не попали во врага или в игрока
         {
             if (bulletMarkPrefab == null)
             {
