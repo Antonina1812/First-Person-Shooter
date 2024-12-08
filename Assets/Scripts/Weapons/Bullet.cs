@@ -6,32 +6,42 @@ public class Bullet : MonoBehaviour
     [SerializeField] private GameObject bulletMarkPrefab; // Префаб следа от пули
     [SerializeField] private float bulletMarkLifetime = 10f; // Время жизни следа
 
+    private int bulletDamage = 25; //Урон пули
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (bulletMarkPrefab == null)
+        if (collision.gameObject.CompareTag("Enemy")) //Если попали во врага
         {
-            Debug.LogError("Префаб следа от пули не назначен");
-            return;
+            collision.gameObject.GetComponent<Enemy>().TakeDamage(bulletDamage);
+            Destroy(gameObject);
         }
+        else //Если не попали во врага
+        {
+            if (bulletMarkPrefab == null)
+            {
+                Debug.LogError("Префаб следа от пули не назначен");
+                return;
+            }
 
-        // Создаем след на месте столкновения
-        ContactPoint contact = collision.contacts[0];
-        Quaternion rotation = Quaternion.LookRotation(-contact.normal); // Поворачиваем след в направлении нормали
-        GameObject bulletMark = Instantiate(bulletMarkPrefab, contact.point, rotation);
+            // Создаем след на месте столкновения
+            ContactPoint contact = collision.contacts[0];
+            Quaternion rotation = Quaternion.LookRotation(-contact.normal); // Поворачиваем след в направлении нормали
+            GameObject bulletMark = Instantiate(bulletMarkPrefab, contact.point, rotation);
 
-        // Смещаем след немного наружу по нормали
-        bulletMark.transform.position += contact.normal * 0.01f;
+            // Смещаем след немного наружу по нормали
+            bulletMark.transform.position += contact.normal * 0.01f;
 
-        // Устанавливаем масштаб
-        bulletMark.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
+            // Устанавливаем масштаб
+            bulletMark.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
 
-        // Привязываем след к объекту
-        bulletMark.transform.SetParent(collision.transform);
+            // Привязываем след к объекту
+            bulletMark.transform.SetParent(collision.transform);
 
-        // Уничтожаем след через заданное время
-        Destroy(bulletMark, bulletMarkLifetime);
+            // Уничтожаем след через заданное время
+            Destroy(bulletMark, bulletMarkLifetime);
 
-        // Уничтожаем пулю
-        Destroy(gameObject);
+            // Уничтожаем пулю
+            Destroy(gameObject);
+        }
     }
 }

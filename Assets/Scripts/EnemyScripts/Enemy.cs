@@ -22,8 +22,10 @@ public class Enemy : MonoBehaviour
         HP -= damageAmount;
 
         if (HP <= 0)
-            animator.SetTrigger("Die");
+            Destroy(gameObject);
+        //animator.SetTrigger("Die");
         else
-            animator.SetTrigger("TakeDamage");
+            //animator.SetTrigger("TakeDamage");
+            Debug.Log("Enemy damaged");
     }
 }
