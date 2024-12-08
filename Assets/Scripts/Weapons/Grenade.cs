@@ -1,4 +1,3 @@
-// Grenade.cs
 using UnityEngine;
 
 public class Grenade : MonoBehaviour
@@ -34,10 +33,12 @@ public class Grenade : MonoBehaviour
                 if (currentGrenades == 0)
                 {
                     weaponSwitch.SwitchToWeapon();
+                    weaponSwitch.UpdateGrenadeSwitch(false); // Блокируем переключение на гранаты
                 }
             }
         }
     }
+
 
     private void ThrowGrenade()
     {
