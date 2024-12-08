@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+// Grenade.cs
 using UnityEngine;
 
 public class Grenade : MonoBehaviour
@@ -7,26 +6,73 @@ public class Grenade : MonoBehaviour
     [SerializeField] float delay = 2f;
     [SerializeField] float damageRadius = 20f;
     [SerializeField] float explosionForce = 1200f;
-    float countdown;
-    bool hasExploded = false;
-    public bool hasBeenThrown = false;
+    [SerializeField] Transform grenadeSpawnPoint; // Позиция появления гранаты
+    [SerializeField] float throwForce = 10f; // Сила броска
+    [SerializeField] int maxGrenades = 3; // Максимальное количество гранат
+
+    private int currentGrenades;
+    private bool canThrow = true;
+    private WeaponSwitch weaponSwitch;
 
     private void Start()
     {
-        countdown = delay;
+        currentGrenades = maxGrenades;
+        weaponSwitch = FindObjectOfType<WeaponSwitch>();
     }
 
     private void Update()
     {
-        if (hasBeenThrown)
+        // Бросок гранаты
+        if (Input.GetMouseButtonDown(1) && canThrow)
         {
-            countdown -= Time.deltaTime;
-            if (countdown <= 0f && !hasExploded)
+            if (currentGrenades > 0)
             {
-                Explode();
-                hasExploded = true;
+                ThrowGrenade();
+                currentGrenades--;
+                UpdateUI();
+
+                if (currentGrenades == 0)
+                {
+                    weaponSwitch.SwitchToWeapon();
+                }
             }
         }
+    }
+
+    private void ThrowGrenade()
+    {
+        if (grenadeSpawnPoint == null)
+        {
+            Debug.LogError("Grenade Spawn Point is not assigned in the inspector.");
+            return;
+        }
+
+        GameObject grenade = Instantiate(gameObject, grenadeSpawnPoint.position, grenadeSpawnPoint.rotation);
+        Rigidbody rb = grenade.AddComponent<Rigidbody>();
+        rb.mass = 1f;
+        Vector3 throwDirection = CalculateThrowDirection();
+        rb.AddForce(throwDirection * throwForce, ForceMode.Impulse);
+
+        Grenade grenadeComponent = grenade.GetComponent<Grenade>();
+        grenadeComponent.canThrow = false; // Отключаем возможность броска для текущей гранаты
+        grenadeComponent.StartExplosionCountdown(); // Начинаем отсчет до взрыва
+    }
+
+    private Vector3 CalculateThrowDirection()
+    {
+        Ray ray = Camera.main.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0));
+        return ray.direction;
+    }
+
+    private void UpdateUI()
+    {
+        // Здесь вызывайте методы UI для отображения оставшихся гранат
+        Debug.Log($"Grenades left: {currentGrenades}");
+    }
+
+    public void StartExplosionCountdown()
+    {
+        Invoke(nameof(Explode), delay); // Запускаем взрыв через заданную задержку
     }
 
     private void Explode()
@@ -38,14 +84,12 @@ public class Grenade : MonoBehaviour
 
     private void CreateExplosionEffect()
     {
-        // Визуальный эффект взрыва
         GameObject explosionEffect = GlobalReferences.Instance.grenadeExplosionEffect;
         Instantiate(explosionEffect, transform.position, Quaternion.identity);
     }
 
     private void ApplyDamageAndForce()
     {
-        // Применение силы взрыва к объектам
         Collider[] colliders = Physics.OverlapSphere(transform.position, damageRadius);
         foreach (Collider objectInRange in colliders)
         {
@@ -54,9 +98,6 @@ public class Grenade : MonoBehaviour
             {
                 rb.AddExplosionForce(explosionForce, transform.position, damageRadius);
             }
-
-            // Логика нанесения урона
-            // Можно добавить урон врагам, если у них есть скрипт Health
         }
     }
 }

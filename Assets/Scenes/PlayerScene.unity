@@ -463,7 +463,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapon: {fileID: 689317957}
   grenade: {fileID: 1700197470}
-  grenadeSpawnPoint: {fileID: 889224830}
 --- !u!1 &1229005637
 GameObject:
   m_ObjectHideFlags: 0
@@ -796,6 +795,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5486757422157945301, guid: 3edd0f06786355645924d132024cdbe7, type: 3}
+      propertyPath: grenadeSpawnPoint
+      value: 
+      objectReference: {fileID: 889224830}
     - target: {fileID: 8076749693349300770, guid: 3edd0f06786355645924d132024cdbe7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
