@@ -3,24 +3,24 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private GameObject bulletMarkPrefab; // Ïðåôàá ñëåäà îò ïóëè
-    [SerializeField] private float bulletMarkLifetime = 10f; // Âðåìÿ æèçíè ñëåäà
+    [SerializeField] private GameObject bulletMarkPrefab; // Префаб следа от пули
+    [SerializeField] private float bulletMarkLifetime = 10f; // Время жизни следа
 
-    private int bulletDamage = 25; //Óðîí ïóëè
+    private int bulletDamage = 25; //Урон пули
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player")) //Åñëè ïîïàëè â èãðîêà
+        if (collision.gameObject.CompareTag("Player")) //Если попали в игрока
         {
             Debug.Log("Ïîïàëè â èãðîêà");
             Destroy(gameObject);
         }
-        else if (collision.gameObject.CompareTag("Enemy")) //Åñëè ïîïàëè âî âðàãà
+        else if (collision.gameObject.CompareTag("Enemy")) //Если попали во врага
         {
             collision.gameObject.GetComponent<Enemy>().TakeDamage(bulletDamage);
             Destroy(gameObject);
         }
-        else //Åñëè íå ïîïàëè âî âðàãà èëè â èãðîêà
+        else //Если не попали во врага или в игрока
         {
             if (bulletMarkPrefab == null)
             {
@@ -28,24 +28,24 @@ public class Bullet : MonoBehaviour
                 return;
             }
 
-            // Ñîçäàåì ñëåä íà ìåñòå ñòîëêíîâåíèÿ
+            // Создаем след на месте столкновения
             ContactPoint contact = collision.contacts[0];
-            Quaternion rotation = Quaternion.LookRotation(-contact.normal); // Ïîâîðà÷èâàåì ñëåä â íàïðàâëåíèè íîðìàëè
+            Quaternion rotation = Quaternion.LookRotation(-contact.normal); // Поворачиваем след в направлении нормали
             GameObject bulletMark = Instantiate(bulletMarkPrefab, contact.point, rotation);
 
-            // Ñìåùàåì ñëåä íåìíîãî íàðóæó ïî íîðìàëè
+            // Смещаем след немного наружу по нормали
             bulletMark.transform.position += contact.normal * 0.01f;
 
-            // Óñòàíàâëèâàåì ìàñøòàá
+            // Устанавливаем масштаб
             bulletMark.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
 
-            // Ïðèâÿçûâàåì ñëåä ê îáúåêòó
+            // Привязываем след к объекту
             bulletMark.transform.SetParent(collision.transform);
 
-            // Óíè÷òîæàåì ñëåä ÷åðåç çàäàííîå âðåìÿ
+            // Уничтожаем след через заданное время
             Destroy(bulletMark, bulletMarkLifetime);
 
-            // Óíè÷òîæàåì ïóëþ
+            // Уничтожаем пулю
             Destroy(gameObject);
         }
     }

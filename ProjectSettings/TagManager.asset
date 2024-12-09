@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Target
   - Enemy
+  - FxTemporaire
+  - Cover
   layers:
   - Default
   - TransparentFX
@@ -15,9 +17,8 @@ TagManager:
   - UI
   - Enemy
   - WeaponRender
-  - 
-  - 
-  - 
+  - Cover
+  - Obstacle
   - 
   - 
   - 
