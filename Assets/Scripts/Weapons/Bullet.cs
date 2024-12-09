@@ -12,7 +12,7 @@ public class Bullet : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player")) //Если попали в игрока
         {
-            Debug.Log("Ïîïàëè â èãðîêà");
+            Debug.Log("Попали в игрока");
             Destroy(gameObject);
         }
         else if (collision.gameObject.CompareTag("Enemy")) //Если попали во врага
@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
         {
             if (bulletMarkPrefab == null)
             {
-                Debug.LogError("Ïðåôàá ñëåäà îò ïóëè íå íàçíà÷åí");
+                Debug.LogError("Префаб следа от пули не назначен");
                 return;
             }
 

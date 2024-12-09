@@ -6,6 +6,7 @@ public class HidingEnemy : Enemy
     [SerializeField] private Transform player;
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawn;
+    [SerializeField] private float moveSpeed = 7f; // Скорость движения
     [SerializeField] private float fireRate = 1.5f;
     [SerializeField] private float bulletSpeed = 100f;
     [SerializeField] private float detectionRange = 20f;
@@ -13,7 +14,7 @@ public class HidingEnemy : Enemy
     [SerializeField] private float inaccuracy = 0.25f; // Отклонение пуль
     [SerializeField] private LayerMask coverLayer;
     [SerializeField] private LayerMask obstacleLayer;
-    [SerializeField] private float moveSpeed = 7f; // Скорость движения
+    
 
     private NavMeshAgent agent;
     private float nextFireTime;
