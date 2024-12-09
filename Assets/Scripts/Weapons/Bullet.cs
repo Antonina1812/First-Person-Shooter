@@ -3,49 +3,49 @@ using UnityEngine;
 
 public class Bullet : MonoBehaviour
 {
-    [SerializeField] private GameObject bulletMarkPrefab; // Префаб следа от пули
-    [SerializeField] private float bulletMarkLifetime = 10f; // Время жизни следа
+    [SerializeField] private GameObject bulletMarkPrefab; // ГЏГ°ГҐГґГ ГЎ Г±Г«ГҐГ¤Г  Г®ГІ ГЇГіГ«ГЁ
+    [SerializeField] private float bulletMarkLifetime = 10f; // Г‚Г°ГҐГ¬Гї Г¦ГЁГ§Г­ГЁ Г±Г«ГҐГ¤Г 
 
-    private int bulletDamage = 25; //Урон пули
+    private int bulletDamage = 25; //Г“Г°Г®Г­ ГЇГіГ«ГЁ
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player")) //Если попали в игрока
+        if (collision.gameObject.CompareTag("Player")) //Г…Г±Г«ГЁ ГЇГ®ГЇГ Г«ГЁ Гў ГЁГЈГ°Г®ГЄГ 
         {
-            Debug.Log("Попали в игрока");
+            Debug.Log("ГЏГ®ГЇГ Г«ГЁ Гў ГЁГЈГ°Г®ГЄГ ");
             Destroy(gameObject);
         }
-        else if (collision.gameObject.CompareTag("Enemy")) //Если попали во врага
+        else if (collision.gameObject.CompareTag("Enemy")) //Г…Г±Г«ГЁ ГЇГ®ГЇГ Г«ГЁ ГўГ® ГўГ°Г ГЈГ 
         {
             collision.gameObject.GetComponent<Enemy>().TakeDamage(bulletDamage);
             Destroy(gameObject);
         }
-        else //Если не попали во врага или в игрока
+        else //Г…Г±Г«ГЁ Г­ГҐ ГЇГ®ГЇГ Г«ГЁ ГўГ® ГўГ°Г ГЈГ  ГЁГ«ГЁ Гў ГЁГЈГ°Г®ГЄГ 
         {
             if (bulletMarkPrefab == null)
             {
-                Debug.LogError("Префаб следа от пули не назначен");
+                Debug.LogError("ГЏГ°ГҐГґГ ГЎ Г±Г«ГҐГ¤Г  Г®ГІ ГЇГіГ«ГЁ Г­ГҐ Г­Г Г§Г­Г Г·ГҐГ­");
                 return;
             }
 
-            // Создаем след на месте столкновения
+            // Г‘Г®Г§Г¤Г ГҐГ¬ Г±Г«ГҐГ¤ Г­Г  Г¬ГҐГ±ГІГҐ Г±ГІГ®Г«ГЄГ­Г®ГўГҐГ­ГЁГї
             ContactPoint contact = collision.contacts[0];
-            Quaternion rotation = Quaternion.LookRotation(-contact.normal); // Поворачиваем след в направлении нормали
+            Quaternion rotation = Quaternion.LookRotation(-contact.normal); // ГЏГ®ГўГ®Г°Г Г·ГЁГўГ ГҐГ¬ Г±Г«ГҐГ¤ Гў Г­Г ГЇГ°Г ГўГ«ГҐГ­ГЁГЁ Г­Г®Г°Г¬Г Г«ГЁ
             GameObject bulletMark = Instantiate(bulletMarkPrefab, contact.point, rotation);
 
-            // Смещаем след немного наружу по нормали
+            // Г‘Г¬ГҐГ№Г ГҐГ¬ Г±Г«ГҐГ¤ Г­ГҐГ¬Г­Г®ГЈГ® Г­Г Г°ГіГ¦Гі ГЇГ® Г­Г®Г°Г¬Г Г«ГЁ
             bulletMark.transform.position += contact.normal * 0.01f;
 
-            // Устанавливаем масштаб
+            // Г“Г±ГІГ Г­Г ГўГ«ГЁГўГ ГҐГ¬ Г¬Г Г±ГёГІГ ГЎ
             bulletMark.transform.localScale = new Vector3(0.05f, 0.05f, 0.05f);
 
-            // Привязываем след к объекту
+            // ГЏГ°ГЁГўГїГ§Г»ГўГ ГҐГ¬ Г±Г«ГҐГ¤ ГЄ Г®ГЎГєГҐГЄГІГі
             bulletMark.transform.SetParent(collision.transform);
 
-            // Уничтожаем след через заданное время
+            // Г“Г­ГЁГ·ГІГ®Г¦Г ГҐГ¬ Г±Г«ГҐГ¤ Г·ГҐГ°ГҐГ§ Г§Г Г¤Г Г­Г­Г®ГҐ ГўГ°ГҐГ¬Гї
             Destroy(bulletMark, bulletMarkLifetime);
 
-            // Уничтожаем пулю
+            // Г“Г­ГЁГ·ГІГ®Г¦Г ГҐГ¬ ГЇГіГ«Гѕ
             Destroy(gameObject);
         }
     }
