@@ -3,43 +3,46 @@ using UnityEngine.AI;
 
 public class HidingEnemy : Enemy
 {
-    [SerializeField] private Transform player;
-    [SerializeField] private GameObject bulletPrefab;
-    [SerializeField] private Transform bulletSpawn;
+    [Header("Основные параметры")]
+    [SerializeField] private Transform player; // Ссылка на игрока
+    [SerializeField] private GameObject bulletPrefab; // Префаб пули
+    [SerializeField] private Transform bulletSpawn; // Точка появления пули
     [SerializeField] private float moveSpeed = 7f; // Скорость движения
-    [SerializeField] private float fireRate = 1.5f;
-    [SerializeField] private float bulletSpeed = 100f;
-    [SerializeField] private float detectionRange = 20f;
-    [SerializeField] private float safeDistance = 5f;
-    [SerializeField] private float inaccuracy = 0.25f; // Отклонение пуль
-    [SerializeField] private LayerMask coverLayer;
-    [SerializeField] private LayerMask obstacleLayer;
-    
+    [SerializeField] private float detectionRange = 20f; // Радиус обнаружения игрока
+    [SerializeField] private float safeDistance = 5f; // Дистанция, на которой враг будет искать укрытие
+    [SerializeField] private float retreatDistance = 3f; // Дистанция для первоначального отбегания
+
+    [Header("Стрельба")]
+    [SerializeField] private float fireRate = 1.5f; // Скорость стрельбы
+    [SerializeField] private float bulletSpeed = 100f; // Скорость пули
+    [SerializeField] private float inaccuracy = 0.25f; // Разброс пуль
+
+    [Header("Укрытия")]
+    [SerializeField] private LayerMask coverLayer; // Слой укрытий
+    [SerializeField] private LayerMask obstacleLayer; // Слой препятствий
 
     private NavMeshAgent agent;
     private float nextFireTime;
-    private Transform currentCover;
+    private Transform currentCover; // Текущее укрытие
+    private Transform lastUsedCover; // Последнее укрытие
+    private bool isRetreating; // Флаг, обозначающий, что враг отступает
     private WeaponSoundManager weaponSoundManager;
-    private bool isInCover;
 
-    void Start()
+    private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
-        agent.speed = moveSpeed; // Устанавливаем скорость из параметра
-        agent.acceleration = 50f; // Быстрый разгон
-        agent.angularSpeed = 720f; // Быстрые повороты
+        agent.speed = moveSpeed;
+        agent.acceleration = 50f;
+        agent.angularSpeed = 720f;
 
         weaponSoundManager = GetComponentInChildren<WeaponSoundManager>();
         if (weaponSoundManager == null)
         {
             Debug.LogError("WeaponSoundManager не найден у врага " + gameObject.name);
         }
-
-        FindCover();
     }
 
-
-    void Update()
+    private void Update()
     {
         if (player == null) return;
 
@@ -47,34 +50,41 @@ public class HidingEnemy : Enemy
 
         if (distanceToPlayer <= detectionRange)
         {
-            if (distanceToPlayer <= safeDistance)
+            if (distanceToPlayer <= safeDistance && !isRetreating)
             {
-                FindCover(); // Пытаемся сменить укрытие или отступить
+                // Игрок слишком близко - враг сначала отступает
+                RetreatFromCover();
             }
-            else if (agent.pathPending || agent.remainingDistance > agent.stoppingDistance)
+            else if (isRetreating)
             {
-                // Враг в движении, ничего не делаем
+                // Проверяем, завершилось ли отступление
+                if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    isRetreating = false;
+                    FindCover();
+                }
             }
-            else if (isInCover && Time.time > nextFireTime && HasLineOfSight())
+            else if (isInCover() && Time.time > nextFireTime && HasLineOfSight())
             {
-                // Если враг в укрытии, атакуем игрока
+                // Если враг в укрытии и видит игрока, стреляет
                 LookAtPlayer();
                 Fire();
                 nextFireTime = Time.time + fireRate;
             }
-            else
-            {
-                // Если враг стоит на месте, наблюдаем за игроком и атакуем
-                LookAtPlayer();
-                if (Time.time > nextFireTime && HasLineOfSight())
-                {
-                    Fire();
-                    nextFireTime = Time.time + fireRate;
-                }
-            }
         }
     }
 
+    /// <summary>
+    /// Проверяет, находится ли враг в укрытии.
+    /// </summary>
+    private bool isInCover()
+    {
+        return currentCover != null && !isRetreating;
+    }
+
+    /// <summary>
+    /// Поворачивает врага в сторону игрока.
+    /// </summary>
     private void LookAtPlayer()
     {
         Vector3 direction = (player.position - transform.position).normalized;
@@ -82,6 +92,9 @@ public class HidingEnemy : Enemy
         transform.rotation = Quaternion.LookRotation(direction);
     }
 
+    /// <summary>
+    /// Стреляет в игрока с заданной неточностью.
+    /// </summary>
     private void Fire()
     {
         if (bulletPrefab == null || bulletSpawn == null) return;
@@ -97,6 +110,9 @@ public class HidingEnemy : Enemy
         bullet.GetComponent<Rigidbody>().AddForce(shootingDirection * bulletSpeed, ForceMode.Impulse);
     }
 
+    /// <summary>
+    /// Рассчитывает направление выстрела с учетом неточности.
+    /// </summary>
     private Vector3 CalculateInaccurateDirection()
     {
         Vector3 direction = (player.position - bulletSpawn.position).normalized;
@@ -105,21 +121,57 @@ public class HidingEnemy : Enemy
         return direction.normalized;
     }
 
+    /// <summary>
+    /// Отступает от текущего укрытия и игрока на заданное расстояние.
+    /// </summary>
+    private void RetreatFromCover()
+    {
+        isRetreating = true;
+
+        // Рассчитываем направление отступления
+        Vector3 retreatDirection = (transform.position - player.position).normalized;
+        Vector3 retreatTarget = transform.position + retreatDirection * retreatDistance;
+
+        // Проверяем, доступна ли позиция на NavMesh
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(retreatTarget, out hit, retreatDistance, NavMesh.AllAreas))
+        {
+            agent.isStopped = false;
+            agent.SetDestination(hit.position);
+        }
+        else
+        {
+            Debug.LogWarning("Не удалось найти точку для отступления, враг останется на месте.");
+        }
+    }
+
+    /// <summary>
+    /// Ищет ближайшее укрытие после отступления.
+    /// </summary>
     private void FindCover()
     {
         Collider[] covers = Physics.OverlapSphere(transform.position, detectionRange, coverLayer);
+        Debug.Log($"Найдено укрытий: {covers.Length}");
 
         Transform bestCover = null;
         float bestScore = Mathf.Infinity;
 
         foreach (Collider cover in covers)
         {
-            Vector3 coverToPlayer = player.position - cover.transform.position;
-            Vector3 coverDirection = coverToPlayer.normalized;
-
-            if (Physics.Raycast(cover.transform.position, coverDirection, detectionRange, obstacleLayer))
+            if (cover.transform == lastUsedCover)
             {
-                float distanceToCover = Vector3.Distance(transform.position, cover.transform.position);
+                Debug.Log($"Укрытие {cover.name} пропущено (это последнее использованное укрытие).");
+                continue;
+            }
+
+            Vector3 coverPosition = cover.transform.position;
+            Vector3 directionToPlayer = (player.position - coverPosition).normalized;
+            Vector3 coverOffset = coverPosition - directionToPlayer * 1.5f;
+
+            NavMeshHit navHit;
+            if (NavMesh.SamplePosition(coverOffset, out navHit, 2.0f, NavMesh.AllAreas))
+            {
+                float distanceToCover = Vector3.Distance(transform.position, navHit.position);
                 if (distanceToCover < bestScore)
                 {
                     bestCover = cover.transform;
@@ -130,37 +182,25 @@ public class HidingEnemy : Enemy
 
         if (bestCover != null)
         {
+            Debug.Log($"Нашли укрытие: {bestCover.name}");
+            lastUsedCover = currentCover; // Запоминаем текущее укрытие как "последнее использованное"
             currentCover = bestCover;
+
+            Vector3 directionToPlayer = (player.position - currentCover.position).normalized;
+            Vector3 targetPosition = currentCover.position - directionToPlayer * 1.5f;
+
             agent.isStopped = false;
-            Vector3 coverPosition = currentCover.position;
-            Vector3 offset = (coverPosition - player.position).normalized * 1.5f;
-            agent.SetDestination(coverPosition + offset);
-            isInCover = false;
+            agent.SetDestination(targetPosition);
         }
         else
         {
-            RetreatFromPlayer();
+            Debug.LogWarning("Укрытие не найдено, враг будет продолжать двигаться.");
         }
     }
 
-    private void RetreatFromPlayer()
-    {
-        Vector3 directionAwayFromPlayer = (transform.position - player.position).normalized;
-        Vector3 retreatPosition = transform.position + directionAwayFromPlayer * safeDistance;
-
-        NavMeshHit hit;
-        if (NavMesh.SamplePosition(retreatPosition, out hit, safeDistance, NavMesh.AllAreas))
-        {
-            agent.isStopped = false;
-            agent.SetDestination(hit.position);
-            isInCover = false;
-        }
-        else
-        {
-            Debug.LogWarning("Не удалось найти точку отступления, враг останется на месте.");
-        }
-    }
-
+    /// <summary>
+    /// Проверяет, есть ли у врага прямая видимость игрока.
+    /// </summary>
     private bool HasLineOfSight()
     {
         Vector3 directionToPlayer = (player.position - transform.position).normalized;
