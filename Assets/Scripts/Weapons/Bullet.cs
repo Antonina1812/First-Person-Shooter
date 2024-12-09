@@ -13,6 +13,8 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.CompareTag("Player")) //Если попали в игрока
         {
             Debug.Log("Попали в игрока");
+            Debug.Log("Player");
+            collision.gameObject.GetComponentInParent<HealthBar>().TakeDamage(bulletDamage);
             Destroy(gameObject);
         }
         else if (collision.gameObject.CompareTag("Enemy")) //Если попали во врага
