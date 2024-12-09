@@ -1467,62 +1467,6 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1499334515}
-    - target: {fileID: 1748926008766929198, guid: ae8fd59b251ebed40918c2d8853efac7, type: 3}
-      propertyPath: safeDistance
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 1748926008766929198, guid: ae8fd59b251ebed40918c2d8853efac7, type: 3}
-      propertyPath: detectionRange
-      value: 25
-      objectReference: {fileID: 0}
-    - target: {fileID: 1748926008766929198, guid: ae8fd59b251ebed40918c2d8853efac7, type: 3}
-      propertyPath: retreatDistance
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2293020226828802357, guid: ae8fd59b251ebed40918c2d8853efac7, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2335006584163483718, guid: ae8fd59b251ebed40918c2d8853efac7, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4375094668304181574, guid: ae8fd59b251ebed40918c2d8853efac7, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4375094668304181574, guid: ae8fd59b251ebed40918c2d8853efac7, type: 3}
-      propertyPath: m_MotionVectors
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4375094668304181574, guid: ae8fd59b251ebed40918c2d8853efac7, type: 3}
-      propertyPath: m_ReceiveShadows
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4375094668304181574, guid: ae8fd59b251ebed40918c2d8853efac7, type: 3}
-      propertyPath: m_DynamicOccludee
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4375094668304181574, guid: ae8fd59b251ebed40918c2d8853efac7, type: 3}
-      propertyPath: m_Materials.Array.size
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4375094668304181574, guid: ae8fd59b251ebed40918c2d8853efac7, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 28f0b13c7e9707746b5e0b3336181560, type: 2}
-    - target: {fileID: 5577356247345868727, guid: ae8fd59b251ebed40918c2d8853efac7, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7125257106919633252, guid: ae8fd59b251ebed40918c2d8853efac7, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7620789481748456883, guid: ae8fd59b251ebed40918c2d8853efac7, type: 3}
-      propertyPath: m_Layer
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 7726313553413488522, guid: ae8fd59b251ebed40918c2d8853efac7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 16.12
@@ -1561,10 +1505,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7726313553413488522, guid: ae8fd59b251ebed40918c2d8853efac7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 8172272683238297686, guid: ae8fd59b251ebed40918c2d8853efac7, type: 3}
-      propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

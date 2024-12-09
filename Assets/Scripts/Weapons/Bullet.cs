@@ -5,8 +5,7 @@ public class Bullet : MonoBehaviour
 {
     [SerializeField] private GameObject bulletMarkPrefab; // Префаб следа от пули
     [SerializeField] private float bulletMarkLifetime = 10f; // Время жизни следа
-
-    private int bulletDamage = 25; //Урон пули
+    [SerializeField] private int bulletDamage = 25; //Урон пули
 
     private void OnCollisionEnter(Collision collision)
     {
