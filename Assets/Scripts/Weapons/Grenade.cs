@@ -2,12 +2,13 @@ using UnityEngine;
 
 public class Grenade : MonoBehaviour
 {
-    [SerializeField] float delay = 2f;
+    [SerializeField] float delay = 2f; // Задержка перед взрывом
     [SerializeField] float damageRadius = 20f;
-    [SerializeField] float explosionForce = 1200f;
+    [SerializeField] float explosionForce = 1200f; // Сила взрыва
     [SerializeField] Transform grenadeSpawnPoint; // Позиция появления гранаты
-    [SerializeField] float throwForce = 10f; // Сила броска
+    [SerializeField] float throwForce = 15f; // Сила броска
     [SerializeField] int maxGrenades = 3; // Максимальное количество гранат
+    [SerializeField] private int grenadeDamage = 100; // Урон от гранаты
 
     private int currentGrenades;
     private bool canThrow = true;
@@ -110,11 +111,23 @@ public class Grenade : MonoBehaviour
         Collider[] colliders = Physics.OverlapSphere(transform.position, damageRadius);
         foreach (Collider objectInRange in colliders)
         {
+            // Добавляем взрывное воздействие
             Rigidbody rb = objectInRange.GetComponent<Rigidbody>();
             if (rb != null)
             {
                 rb.AddExplosionForce(explosionForce, transform.position, damageRadius);
             }
+
+            // Наносим урон врагам
+            if (objectInRange.CompareTag("Enemy"))
+            {
+                Enemy enemy = objectInRange.GetComponent<Enemy>();
+                if (enemy != null)
+                {
+                    enemy.TakeDamage(grenadeDamage); // Урон фиксирован
+                }
+            }
         }
     }
+
 }
