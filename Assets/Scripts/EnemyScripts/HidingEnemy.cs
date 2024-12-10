@@ -16,6 +16,7 @@ public class HidingEnemy : Enemy
     [SerializeField] private float fireRate = 1.5f; // Скорость стрельбы
     [SerializeField] private float bulletSpeed = 100f; // Скорость пули
     [SerializeField] private float inaccuracy = 0.25f; // Разброс пуль
+    [SerializeField] private int bulletDamage = 10; //Урон пули
 
     [Header("Укрытия")]
     [SerializeField] private LayerMask coverLayer; // Слой укрытий
@@ -34,6 +35,8 @@ public class HidingEnemy : Enemy
         agent.speed = moveSpeed;
         agent.acceleration = 50f;
         agent.angularSpeed = 720f;
+
+        FindCover();
 
         weaponSoundManager = GetComponentInChildren<WeaponSoundManager>();
         if (weaponSoundManager == null)
@@ -74,17 +77,13 @@ public class HidingEnemy : Enemy
         }
     }
 
-    /// <summary>
-    /// Проверяет, находится ли враг в укрытии.
-    /// </summary>
+    // Проверяет, находится ли враг в укрытии.
     private bool isInCover()
     {
         return currentCover != null && !isRetreating;
     }
 
-    /// <summary>
-    /// Поворачивает врага в сторону игрока.
-    /// </summary>
+    // Поворачивает врага в сторону игрока.
     private void LookAtPlayer()
     {
         Vector3 direction = (player.position - transform.position).normalized;
@@ -92,9 +91,7 @@ public class HidingEnemy : Enemy
         transform.rotation = Quaternion.LookRotation(direction);
     }
 
-    /// <summary>
-    /// Стреляет в игрока с заданной неточностью.
-    /// </summary>
+    // Стреляет в игрока с заданной неточностью.
     private void Fire()
     {
         if (bulletPrefab == null || bulletSpawn == null) return;
@@ -106,13 +103,13 @@ public class HidingEnemy : Enemy
 
         Vector3 shootingDirection = CalculateInaccurateDirection();
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.identity);
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        bulletScript.SetDamage(bulletDamage);        
         bullet.transform.forward = shootingDirection;
         bullet.GetComponent<Rigidbody>().AddForce(shootingDirection * bulletSpeed, ForceMode.Impulse);
     }
 
-    /// <summary>
-    /// Рассчитывает направление выстрела с учетом неточности.
-    /// </summary>
+    // Рассчитывает направление выстрела с учетом неточности.
     private Vector3 CalculateInaccurateDirection()
     {
         Vector3 direction = (player.position - bulletSpawn.position).normalized;
@@ -121,9 +118,7 @@ public class HidingEnemy : Enemy
         return direction.normalized;
     }
 
-    /// <summary>
-    /// Отступает от текущего укрытия и игрока на заданное расстояние.
-    /// </summary>
+    // Отступает от текущего укрытия и игрока на заданное расстояние.
     private void RetreatFromCover()
     {
         isRetreating = true;
@@ -139,19 +134,12 @@ public class HidingEnemy : Enemy
             agent.isStopped = false;
             agent.SetDestination(hit.position);
         }
-        else
-        {
-            Debug.LogWarning("Не удалось найти точку для отступления, враг останется на месте.");
-        }
     }
 
-    /// <summary>
-    /// Ищет ближайшее укрытие после отступления.
-    /// </summary>
+    // Ищет ближайшее укрытие после отступления.
     private void FindCover()
     {
         Collider[] covers = Physics.OverlapSphere(transform.position, detectionRange, coverLayer);
-        Debug.Log($"Найдено укрытий: {covers.Length}");
 
         Transform bestCover = null;
         float bestScore = Mathf.Infinity;
@@ -160,7 +148,6 @@ public class HidingEnemy : Enemy
         {
             if (cover.transform == lastUsedCover)
             {
-                Debug.Log($"Укрытие {cover.name} пропущено (это последнее использованное укрытие).");
                 continue;
             }
 
@@ -192,15 +179,9 @@ public class HidingEnemy : Enemy
             agent.isStopped = false;
             agent.SetDestination(targetPosition);
         }
-        else
-        {
-            Debug.LogWarning("Укрытие не найдено, враг будет продолжать двигаться.");
-        }
     }
 
-    /// <summary>
-    /// Проверяет, есть ли у врага прямая видимость игрока.
-    /// </summary>
+    // Проверяет, есть ли у врага прямая видимость игрока.
     private bool HasLineOfSight()
     {
         Vector3 directionToPlayer = (player.position - transform.position).normalized;
