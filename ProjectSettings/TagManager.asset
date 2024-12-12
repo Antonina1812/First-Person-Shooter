@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Target
   - Enemy
+  - FxTemporaire
+  - Cover
   - hp
   - Pause
   - FxTemporaire
@@ -19,9 +21,8 @@ TagManager:
   - UI
   - Enemy
   - WeaponRender
-  - 
-  - 
-  - 
+  - Cover
+  - Obstacle
   - 
   - 
   - 
