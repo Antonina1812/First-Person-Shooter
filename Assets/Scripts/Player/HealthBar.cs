@@ -8,9 +8,9 @@ public class HealthBar : MonoBehaviour
     private float health = 100f;
     public Image healthBar;
     public Text healthText;
+    public GameObject pause;
     void Start()
     {
-
     }
 
     // Update is called once per frame
@@ -22,6 +22,5 @@ public class HealthBar : MonoBehaviour
     {
         health -= damage;
         healthBar.fillAmount = health / 100;
-        Debug.Log(health);
     }
 }
