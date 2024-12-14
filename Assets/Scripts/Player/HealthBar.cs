@@ -5,10 +5,11 @@ using UnityEngine.UI;
 
 public class HealthBar : MonoBehaviour
 {
-    private float health = 100f;
+    public float health = 100f;
     public Image healthBar;
     public Text healthText;
-    public GameObject pause;
+    public GameObject deadPause;
+    private bool isDead=false;
     void Start()
     {
     }
@@ -17,6 +18,13 @@ public class HealthBar : MonoBehaviour
     void Update()
     {
         healthText.text=health.ToString();
+        if(health <= 0 && !isDead)
+        {
+            isDead=true;
+            deadPause.SetActive(true);
+            Time.timeScale = 0f;
+            Cursor.lockState = CursorLockMode.None;
+        }
     }
     public void TakeDamage(float damage)
     {

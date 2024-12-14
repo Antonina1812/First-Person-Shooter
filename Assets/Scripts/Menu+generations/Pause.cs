@@ -19,6 +19,13 @@ public class Pause : MonoBehaviour
         Time.timeScale = 1f;
         Cursor.lockState = CursorLockMode.Locked;
     }
+    public void Restart()
+    {
+        isMenuActive = false;
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("GameScene");
+        Cursor.lockState = CursorLockMode.Locked;
+    }
     public void ExitMenu()
     {
         SceneManager.LoadScene("Menu");
@@ -39,7 +46,6 @@ public class Pause : MonoBehaviour
             }
             else
             {
-                Debug.Log("Yes");
                 isMenuActive = true;
                 pause.SetActive(true);
                 Time.timeScale = 0;
