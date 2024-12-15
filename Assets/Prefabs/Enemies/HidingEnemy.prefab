@@ -66,7 +66,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 40d84a96d0761644f8df616fdfc16842, type: 2}
+  - {fileID: 2100000, guid: 5f15dbd7f86715e438476282b4c218bc, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -125,7 +125,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   HP: 100
   animator: {fileID: 0}
-  player: {fileID: 0}
   bulletPrefab: {fileID: 7394954646298223805, guid: 7fcbcd71dc705ea4586414e81d5db0ce, type: 3}
   bulletSpawn: {fileID: 8720187218367914330}
   moveSpeed: 15
@@ -135,6 +134,7 @@ MonoBehaviour:
   fireRate: 1
   bulletSpeed: 100
   inaccuracy: 0.1
+  bulletDamage: 10
   coverLayer:
     serializedVersion: 2
     m_Bits: 256

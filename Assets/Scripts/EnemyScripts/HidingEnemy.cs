@@ -4,7 +4,7 @@ using UnityEngine.AI;
 public class HidingEnemy : Enemy
 {
     [Header("Основные параметры")]
-    [SerializeField] private Transform player; // Ссылка на игрока
+    private Transform player; // Ссылка на игрока
     [SerializeField] private GameObject bulletPrefab; // Префаб пули
     [SerializeField] private Transform bulletSpawn; // Точка появления пули
     [SerializeField] private float moveSpeed = 7f; // Скорость движения
@@ -35,6 +35,13 @@ public class HidingEnemy : Enemy
         agent.speed = moveSpeed;
         agent.acceleration = 50f;
         agent.angularSpeed = 720f;
+
+        GameObject playerObject = GameObject.Find("Player");
+        if (playerObject != null)
+        {
+            player = playerObject.transform;
+        }
+
 
         FindCover();
 
