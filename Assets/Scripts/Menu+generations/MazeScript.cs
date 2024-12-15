@@ -1,8 +1,10 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.AI.Navigation;
 using UnityEngine;
 public class Door : MonoBehaviour
 {
+    [SerializeField] private NavMeshSurface navMeshSurface;
     public GameObject maze;
     public GameObject[] prefab;
     
@@ -24,7 +26,12 @@ public class Door : MonoBehaviour
         if(GameObject.FindGameObjectsWithTag("Enemy").Length==0)
         {
             Destroy(gameObject);
-            Instantiate(prefab[Current_Maze.number=Number(Current_Maze.number)],new Vector3(maze.transform.position.x+60,maze.transform.position.y,maze.transform.position.z), Quaternion.Euler(0,0,0));
+            GameObject newMaze = Instantiate(prefab[Current_Maze.number=Number(Current_Maze.number)],new Vector3(maze.transform.position.x+60,maze.transform.position.y,maze.transform.position.z), Quaternion.Euler(0,0,0));
+            navMeshSurface = newMaze.GetComponent<NavMeshSurface>();
+            if (navMeshSurface != null) 
+            { 
+                navMeshSurface.BuildNavMesh();
+            }
         }
     }
 }

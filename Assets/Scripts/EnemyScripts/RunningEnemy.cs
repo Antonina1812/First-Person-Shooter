@@ -2,13 +2,14 @@ using UnityEngine;
 
 public class RunningEnemy : Enemy
 {
-    [SerializeField] private float moveSpeed = 7f;
-    [SerializeField] private Transform player;
+    [SerializeField] private float moveSpeed = 7f; //Скорость врага
+    [SerializeField] private Transform player; //Для координат игрока
     [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private Transform bulletSpawn;
     [SerializeField] private float fireRate = 1.5f; //Задержка перед выстрелом
     [SerializeField] private float stopDistance = 12f; // Дистанция остановки от игрока
     [SerializeField] private float bulletSpeed = 100f;
+    [SerializeField] private int bulletDamage = 20;
     [SerializeField] private float inaccuracy = 0.25f; //Отклонение пули относительно прямой к игроку
     private WeaponSoundManager weaponSoundManager;
     private float nextFireTime;
@@ -57,20 +58,22 @@ public class RunningEnemy : Enemy
         }
     }
 
-private void Fire()
-{
-    // Проигрываем звук стрельбы
-    if (weaponSoundManager != null)
+    private void Fire()
     {
-        weaponSoundManager.PlayShootSound();
-    }
+        // Проигрываем звук стрельбы
+        if (weaponSoundManager != null)
+        {
+            weaponSoundManager.PlayShootSound();
+        }
 
-    // Создаём пулю
-    Vector3 shootingDirection = CalculateInaccurateDirection();
-    GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.identity);
-    bullet.transform.forward = shootingDirection;
-    bullet.GetComponent<Rigidbody>().AddForce(shootingDirection * bulletSpeed, ForceMode.Impulse);
-}
+        // Создаём пулю и назначаем ей урон
+        Vector3 shootingDirection = CalculateInaccurateDirection();
+        GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.identity);
+        Bullet bulletScript = bullet.GetComponent<Bullet>();
+        bulletScript.SetDamage(bulletDamage);
+        bullet.transform.forward = shootingDirection;
+        bullet.GetComponent<Rigidbody>().AddForce(shootingDirection * bulletSpeed, ForceMode.Impulse);
+    }
 
     //Считаем случайное отклонение от прямой к игроку
     private Vector3 CalculateInaccurateDirection()

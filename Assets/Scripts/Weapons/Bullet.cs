@@ -50,4 +50,9 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
     }
+
+    public void SetDamage(int damage)
+    {
+        bulletDamage = damage;
+    }
 }

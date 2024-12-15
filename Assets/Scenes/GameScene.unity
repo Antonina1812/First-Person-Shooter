@@ -121,7 +121,7 @@ NavMeshSettings:
     preserveTilesOutsideBounds: 0
     debug:
       m_Flags: 0
-  m_NavMeshData: {fileID: 0}
+  m_NavMeshData: {fileID: 23800000, guid: 58b4e3ea2b74775428737dd2d8346816, type: 2}
 --- !u!1001 &158462761
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -756,6 +756,10 @@ PrefabInstance:
       propertyPath: m_TagString
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 7666826454455745227, guid: b7837b94ea206904c87f9cfefbd8b245, type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 887
+      objectReference: {fileID: 0}
     - target: {fileID: 8653307764040624160, guid: b7837b94ea206904c87f9cfefbd8b245, type: 3}
       propertyPath: pause
       value: 
@@ -1180,6 +1184,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2741731837682287601, guid: 23119d09f6093994b9de75733c60a862, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5f15dbd7f86715e438476282b4c218bc, type: 2}
     - target: {fileID: 6778876696473867425, guid: 23119d09f6093994b9de75733c60a862, type: 3}
       propertyPath: m_Name
       value: RandomMaze1
