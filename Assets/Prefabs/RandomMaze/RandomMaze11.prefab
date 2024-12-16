@@ -810,7 +810,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 100
-  animator: {fileID: 0}
+  Damage: 0
   bulletPrefab: {fileID: 7394954646298223805, guid: 7fcbcd71dc705ea4586414e81d5db0ce, type: 3}
   bulletSpawn: {fileID: 8076466703897567587}
   moveSpeed: 15
@@ -1072,7 +1072,7 @@ GameObject:
   - component: {fileID: 6062433091826528759}
   - component: {fileID: 513022975833754894}
   - component: {fileID: 8533910857313786836}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crate-2
   m_TagString: Cover
   m_Icon: {fileID: 0}
@@ -1620,7 +1620,7 @@ GameObject:
   - component: {fileID: 7691730145565269158}
   - component: {fileID: 4143886409005998175}
   - component: {fileID: 5256298503012480645}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Crate
   m_TagString: Cover
   m_Icon: {fileID: 0}
@@ -1830,7 +1830,7 @@ GameObject:
   - component: {fileID: 7002475069060907885}
   - component: {fileID: 3607735773168435092}
   - component: {fileID: 278039213191319327}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Box
   m_TagString: Cover
   m_Icon: {fileID: 0}
@@ -1970,7 +1970,7 @@ GameObject:
   - component: {fileID: 2373504069828187665}
   - component: {fileID: 1684270347307882932}
   - component: {fileID: 3511485808191368574}
-  - component: {fileID: 1438528808547750220}
+  - component: {fileID: 6908832358077827060}
   m_Layer: 0
   m_Name: Propane Tank
   m_TagString: Untagged
@@ -2043,8 +2043,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1438528808547750220
-BoxCollider:
+--- !u!136 &6908832358077827060
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2061,9 +2061,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.312293, y: 0.4658095, z: 0.312293}
-  m_Center: {x: 0.000000007450581, y: 0.2331434, z: 0.000000014901161}
+  serializedVersion: 2
+  m_Radius: 0.15
+  m_Height: 0.7
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.2, z: 0}
 --- !u!1 &3371483096329772424
 GameObject:
   m_ObjectHideFlags: 0
@@ -2772,10 +2774,10 @@ GameObject:
   - component: {fileID: 5204843556669214488}
   - component: {fileID: 9193124704652673213}
   - component: {fileID: 6372731460475958391}
-  - component: {fileID: 1631243637219989009}
+  - component: {fileID: 4946902398089391269}
   m_Layer: 0
   m_Name: Oil barrel
-  m_TagString: Cover
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -2845,8 +2847,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &1631243637219989009
-BoxCollider:
+--- !u!136 &4946902398089391269
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -2863,9 +2865,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5231039, y: 0.79999995, z: 0.5311736}
-  m_Center: {x: 0, y: 0.39999998, z: -0.000000014901161}
+  serializedVersion: 2
+  m_Radius: 0.27
+  m_Height: 1.5
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.3, z: 0}
 --- !u!1 &4864605363035431721
 GameObject:
   m_ObjectHideFlags: 0
@@ -3173,7 +3177,7 @@ GameObject:
   - component: {fileID: 8803113021624901048}
   m_Layer: 0
   m_Name: Weapon Crate Lid
-  m_TagString: Cover
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 1
   m_StaticEditorFlags: 4294967295
@@ -3659,7 +3663,7 @@ GameObject:
   - component: {fileID: 6460324643641414893}
   - component: {fileID: 7928715364798421832}
   - component: {fileID: 5326777407203258242}
-  - component: {fileID: 522322833784704484}
+  - component: {fileID: 2399734243770034837}
   m_Layer: 8
   m_Name: Oil barrel2
   m_TagString: Cover
@@ -3732,8 +3736,8 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &522322833784704484
-BoxCollider:
+--- !u!136 &2399734243770034837
+CapsuleCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3750,9 +3754,11 @@ BoxCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.5231039, y: 0.79999995, z: 0.5311736}
-  m_Center: {x: 0, y: 0.39999998, z: -0.000000014901161}
+  serializedVersion: 2
+  m_Radius: 0.28
+  m_Height: 1.1
+  m_Direction: 1
+  m_Center: {x: 0, y: 0.4, z: 0}
 --- !u!1 &6455594890690636999
 GameObject:
   m_ObjectHideFlags: 0

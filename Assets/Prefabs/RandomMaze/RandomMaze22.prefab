@@ -3342,7 +3342,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 100
-  animator: {fileID: 0}
+  Damage: 0
   bulletPrefab: {fileID: 7394954646298223805, guid: 7fcbcd71dc705ea4586414e81d5db0ce, type: 3}
   bulletSpawn: {fileID: 5671815852864141383}
   moveSpeed: 15
@@ -4273,6 +4273,10 @@ PrefabInstance:
       value: Wood Pallet
       objectReference: {fileID: 0}
     - target: {fileID: 1614067089262870623, guid: 44ccb0a6ec461f949a66ad46d3448383, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1614067089262870623, guid: 44ccb0a6ec461f949a66ad46d3448383, type: 3}
       propertyPath: m_TagString
       value: Cover
       objectReference: {fileID: 0}
@@ -4489,6 +4493,10 @@ PrefabInstance:
       value: Propane Tank2
       objectReference: {fileID: 0}
     - target: {fileID: 4566550121781879060, guid: 6c1a2221c2412c641b661d5bfa634ecf, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566550121781879060, guid: 6c1a2221c2412c641b661d5bfa634ecf, type: 3}
       propertyPath: m_NavMeshLayer
       value: 1
       objectReference: {fileID: 0}
@@ -4649,6 +4657,10 @@ PrefabInstance:
       value: Nitrogen Tank
       objectReference: {fileID: 0}
     - target: {fileID: 925711010666570921, guid: b781337ede6155c46a3f57476dde71fa, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 925711010666570921, guid: b781337ede6155c46a3f57476dde71fa, type: 3}
       propertyPath: m_NavMeshLayer
       value: 1
       objectReference: {fileID: 0}
@@ -4725,6 +4737,10 @@ PrefabInstance:
     - target: {fileID: 4566550121781879060, guid: 6c1a2221c2412c641b661d5bfa634ecf, type: 3}
       propertyPath: m_Name
       value: Propane Tank
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566550121781879060, guid: 6c1a2221c2412c641b661d5bfa634ecf, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4566550121781879060, guid: 6c1a2221c2412c641b661d5bfa634ecf, type: 3}
       propertyPath: m_NavMeshLayer

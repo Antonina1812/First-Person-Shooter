@@ -36,6 +36,9 @@ public class HidingEnemy : Enemy
         agent.acceleration = 50f;
         agent.angularSpeed = 720f;
 
+        bulletDamage = EnemyStats.HidingEnemyBaseDamage;
+        HP = EnemyStats.BaseHP;
+
         GameObject playerObject = GameObject.Find("Player");
         if (playerObject != null)
         {

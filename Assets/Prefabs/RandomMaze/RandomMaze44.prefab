@@ -2616,7 +2616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 100
-  animator: {fileID: 0}
+  Damage: 0
   bulletPrefab: {fileID: 7394954646298223805, guid: 7fcbcd71dc705ea4586414e81d5db0ce, type: 3}
   bulletSpawn: {fileID: 5454927663958690524}
   moveSpeed: 15
@@ -4327,6 +4327,10 @@ PrefabInstance:
       value: Box
       objectReference: {fileID: 0}
     - target: {fileID: 9112561337208258090, guid: 6ff35ace92e30b44f8fb911e5820ed7c, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9112561337208258090, guid: 6ff35ace92e30b44f8fb911e5820ed7c, type: 3}
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
@@ -4355,6 +4359,10 @@ PrefabInstance:
     - target: {fileID: 373998444139469412, guid: 1d8fa228086e0f04889351bcdaa2d4a6, type: 3}
       propertyPath: m_Name
       value: Oil Barrel (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 373998444139469412, guid: 1d8fa228086e0f04889351bcdaa2d4a6, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 373998444139469412, guid: 1d8fa228086e0f04889351bcdaa2d4a6, type: 3}
       propertyPath: m_TagString
@@ -4443,8 +4451,12 @@ PrefabInstance:
       value: Weapon Crate Lid
       objectReference: {fileID: 0}
     - target: {fileID: 5676598300302103744, guid: 7ed20352687dcfa40a1bc8782b023748, type: 3}
+      propertyPath: m_Layer
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5676598300302103744, guid: 7ed20352687dcfa40a1bc8782b023748, type: 3}
       propertyPath: m_TagString
-      value: Cover
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 5676598300302103744, guid: 7ed20352687dcfa40a1bc8782b023748, type: 3}
       propertyPath: m_NavMeshLayer
@@ -4609,6 +4621,10 @@ PrefabInstance:
     - target: {fileID: 1874084645322689611, guid: b9d366fb3824b7441bf450b3f42ca030, type: 3}
       propertyPath: m_Name
       value: Cloth
+      objectReference: {fileID: 0}
+    - target: {fileID: 1874084645322689611, guid: b9d366fb3824b7441bf450b3f42ca030, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1874084645322689611, guid: b9d366fb3824b7441bf450b3f42ca030, type: 3}
       propertyPath: m_NavMeshLayer
@@ -4829,6 +4845,10 @@ PrefabInstance:
     - target: {fileID: 4566550121781879060, guid: 6c1a2221c2412c641b661d5bfa634ecf, type: 3}
       propertyPath: m_Name
       value: Propane Tank
+      objectReference: {fileID: 0}
+    - target: {fileID: 4566550121781879060, guid: 6c1a2221c2412c641b661d5bfa634ecf, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4566550121781879060, guid: 6c1a2221c2412c641b661d5bfa634ecf, type: 3}
       propertyPath: m_NavMeshLayer
@@ -5079,6 +5099,10 @@ PrefabInstance:
     - target: {fileID: 925711010666570921, guid: b781337ede6155c46a3f57476dde71fa, type: 3}
       propertyPath: m_Name
       value: Nitrogen Tank
+      objectReference: {fileID: 0}
+    - target: {fileID: 925711010666570921, guid: b781337ede6155c46a3f57476dde71fa, type: 3}
+      propertyPath: m_Layer
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 925711010666570921, guid: b781337ede6155c46a3f57476dde71fa, type: 3}
       propertyPath: m_NavMeshLayer
