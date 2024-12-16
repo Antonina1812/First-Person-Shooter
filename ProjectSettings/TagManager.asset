@@ -12,6 +12,8 @@ TagManager:
   - Pause
   - FxTemporaire
   - MiddlePoint
+  - Level
+  - GrenadeSpawn
   layers:
   - Default
   - TransparentFX
@@ -23,6 +25,7 @@ TagManager:
   - WeaponRender
   - Cover
   - Obstacle
+  - 
   - 
   - 
   - 

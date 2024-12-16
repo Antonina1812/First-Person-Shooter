@@ -5,6 +5,7 @@ using UnityEngine;
 public class Current_Maze : MonoBehaviour
 {
     public static int number = 0;
+    public static int level = 0;
     void Start()
     {
         

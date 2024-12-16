@@ -10,8 +10,10 @@ public class Grenade : MonoBehaviour
     [SerializeField] int maxGrenades = 3; // Максимальное количество гранат
     [SerializeField] private int grenadeDamage = 100; // Урон от гранаты
 
+    private int curr_level = 1;
     private int currentGrenades;
     private bool canThrow = true;
+    private bool isInHand = true;
     private WeaponSwitch weaponSwitch;
     private GrenadeSoundManager grenadeSoundManager;
 
@@ -27,7 +29,11 @@ public class Grenade : MonoBehaviour
 
     private void Update()
     {
-        // Бросок гранаты
+        ReturnGrenades();
+        if (currentGrenades > 0 && isInHand)
+        {
+            canThrow = true;
+        }
         if (Input.GetMouseButtonDown(1) && canThrow)
         {
             if (currentGrenades > 0)
@@ -39,12 +45,21 @@ public class Grenade : MonoBehaviour
                 if (currentGrenades == 0)
                 {
                     weaponSwitch.SwitchToWeapon();
-                    weaponSwitch.UpdateGrenadeSwitch(false); // Блокируем переключение на гранаты
                 }
             }
         }
     }
 
+    private void ReturnGrenades()
+    {
+        if (curr_level < Current_Maze.level)
+        {
+            Debug.Log("Yes");
+            currentGrenades = 3;
+            weaponSwitch.UpdateGrenadeSwitch(true);
+            curr_level = Current_Maze.level;
+        }
+    }
     private void ThrowGrenade()
     {
         if (grenadeSpawnPoint == null)
@@ -61,6 +76,7 @@ public class Grenade : MonoBehaviour
 
         Grenade grenadeComponent = grenade.GetComponent<Grenade>();
         grenadeComponent.canThrow = false; // Отключаем возможность броска для текущей гранаты
+        grenadeComponent.isInHand = false;
         grenadeComponent.StartExplosionCountdown(); // Начинаем отсчет до взрыва
     }
 
