@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
     public void StartScene()
     {
         SceneManager.LoadScene("GameScene");
+        Current_Maze.level = 0;
     }
     public void ExitGame()
     {

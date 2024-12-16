@@ -26,7 +26,7 @@ public class Door : MonoBehaviour
         if(GameObject.FindGameObjectsWithTag("Enemy").Length==0)
         {
             Destroy(gameObject);
-            GameObject newMaze = Instantiate(prefab[Current_Maze.number=Number(Current_Maze.number)],new Vector3(maze.transform.position.x+60,maze.transform.position.y,maze.transform.position.z), Quaternion.Euler(0,0,0));
+            GameObject newMaze = Instantiate(prefab[Current_Maze.number=Number(Current_Maze.number)],new Vector3(maze.transform.position.x+123,maze.transform.position.y,maze.transform.position.z), Quaternion.Euler(0,0,0));
             navMeshSurface = newMaze.GetComponent<NavMeshSurface>();
             if (navMeshSurface != null) 
             { 

@@ -22,6 +22,7 @@ public class Pause : MonoBehaviour
     public void Restart()
     {
         isMenuActive = false;
+        Current_Maze.level = 0;
         Time.timeScale = 1f;
         SceneManager.LoadScene("GameScene");
         Cursor.lockState = CursorLockMode.Locked;
