@@ -1,14 +1,14 @@
 using UnityEngine;
-using UnityEngine.UIElements.Experimental;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] private int HP = 100;
-    [SerializeField] private Animator animator;
+    [SerializeField] protected int HP;
+    [SerializeField] protected int Damage;
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        // ”станавливаем здоровье из глобального класса EnemyStats
+        HP = EnemyStats.BaseHP;
     }
 
     public void TakeDamage(int damageAmount)
@@ -19,5 +19,10 @@ public class Enemy : MonoBehaviour
             Destroy(gameObject);
         else
             Debug.Log("Enemy damaged");
+    }
+
+    public int GetDamage()
+    {
+        return Damage;
     }
 }
