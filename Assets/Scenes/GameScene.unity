@@ -958,7 +958,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1477176606372070469, guid: b7837b94ea206904c87f9cfefbd8b245, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 1552243751252685764, guid: b7837b94ea206904c87f9cfefbd8b245, type: 3}
       propertyPath: m_Layer
@@ -986,11 +986,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2718515425970434197, guid: b7837b94ea206904c87f9cfefbd8b245, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3162372515002524108, guid: b7837b94ea206904c87f9cfefbd8b245, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 3277746605353708232, guid: b7837b94ea206904c87f9cfefbd8b245, type: 3}
       propertyPath: m_Layer
@@ -1006,11 +1006,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4244786795696162622, guid: b7837b94ea206904c87f9cfefbd8b245, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 4458642483162995846, guid: b7837b94ea206904c87f9cfefbd8b245, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 5387166728430006255, guid: b7837b94ea206904c87f9cfefbd8b245, type: 3}
       propertyPath: m_Layer
@@ -1018,7 +1018,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5982173129120190621, guid: b7837b94ea206904c87f9cfefbd8b245, type: 3}
       propertyPath: m_Layer
-      value: 3
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 8557229430158334886, guid: b7837b94ea206904c87f9cfefbd8b245, type: 3}
       propertyPath: m_Layer
@@ -1346,7 +1346,7 @@ Camera:
   m_Depth: 0
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 64
+    m_Bits: 192
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
