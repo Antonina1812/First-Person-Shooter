@@ -114,7 +114,7 @@ public class HidingEnemy : Enemy
         Vector3 shootingDirection = CalculateInaccurateDirection();
         GameObject bullet = Instantiate(bulletPrefab, bulletSpawn.position, Quaternion.identity);
         Bullet bulletScript = bullet.GetComponent<Bullet>();
-        bulletScript.SetDamage(bulletDamage);        
+        bulletScript.SetDamage(bulletDamage);
         bullet.transform.forward = shootingDirection;
         bullet.GetComponent<Rigidbody>().AddForce(shootingDirection * bulletSpeed, ForceMode.Impulse);
     }
