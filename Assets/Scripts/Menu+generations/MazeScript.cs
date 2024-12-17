@@ -32,6 +32,10 @@ public class Door : MonoBehaviour
             { 
                 navMeshSurface.BuildNavMesh();
             }
+
+            EnemyStats.IncreaseStats(5);
+            Debug.Log($"Enemy stats increased: HP = {EnemyStats.BaseHP}, RunningEnemy Damage = {EnemyStats.RunningEnemyBaseDamage}, HidingEnemy Damage = {EnemyStats.HidingEnemyBaseDamage}");
+
         }
     }
 }

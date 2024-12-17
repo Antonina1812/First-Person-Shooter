@@ -22,6 +22,9 @@ public class RunningEnemy : Enemy
         {
             Debug.LogError("WeaponSoundManager не найден у врага " + gameObject.name);
         }
+
+        bulletDamage = EnemyStats.RunningEnemyBaseDamage;
+        HP = EnemyStats.BaseHP;
     }
 
     void Update()
