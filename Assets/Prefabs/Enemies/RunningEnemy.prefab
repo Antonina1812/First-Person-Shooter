@@ -146,14 +146,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   HP: 100
-  animator: {fileID: 0}
+  Damage: 0
   moveSpeed: 7
-  player: {fileID: 0}
+  player: {fileID: 346057934082778736, guid: b7837b94ea206904c87f9cfefbd8b245, type: 3}
   bulletPrefab: {fileID: 7394954646298223805, guid: 7fcbcd71dc705ea4586414e81d5db0ce, type: 3}
   bulletSpawn: {fileID: 3484463854025782554}
   fireRate: 1.6
   stopDistance: 12
   bulletSpeed: 15
+  bulletDamage: 20
   inaccuracy: 0.25
 --- !u!1 &8198288256584027095
 GameObject:
